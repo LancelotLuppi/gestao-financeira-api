@@ -30,5 +30,5 @@ public class UserEntity {
     private String password;
 
     @Column(name = "id_balance")
-    private Integer idBalance;
+    private BalanceEntity balance;
 }
