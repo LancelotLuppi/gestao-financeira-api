@@ -29,6 +29,7 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "id_balance")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_balance", referencedColumnName = "id_balance")
     private BalanceEntity balance;
 }

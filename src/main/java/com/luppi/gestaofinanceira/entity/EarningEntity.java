@@ -30,6 +30,7 @@ public class EarningEntity {
     @Column(name = "income_date")
     private Integer incomeDate;
 
-    @Column(name = "id_balance")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_balance", referencedColumnName = "id_balance")
     private BalanceEntity balance;
 }
