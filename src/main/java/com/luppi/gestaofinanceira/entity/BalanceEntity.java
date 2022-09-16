@@ -32,7 +32,6 @@ public class BalanceEntity {
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     private UserEntity user;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_earning", referencedColumnName = "id_earning")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "balance")
     private Set<EarningEntity> earnings;
 }

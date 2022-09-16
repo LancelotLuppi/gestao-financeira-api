@@ -1,5 +1,6 @@
 package com.luppi.gestaofinanceira.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "office")
 public class OfficeEntity implements GrantedAuthority {
 
     @Id
@@ -24,6 +26,7 @@ public class OfficeEntity implements GrantedAuthority {
     @Column(name = "name")
     private String name;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_office",

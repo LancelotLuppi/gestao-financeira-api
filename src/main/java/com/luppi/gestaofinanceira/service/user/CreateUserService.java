@@ -7,6 +7,7 @@ import com.luppi.gestaofinanceira.entity.UserEntity;
 import com.luppi.gestaofinanceira.enums.OfficeEnum;
 import com.luppi.gestaofinanceira.repository.OfficeRepository;
 import com.luppi.gestaofinanceira.repository.UserRepository;
+import com.luppi.gestaofinanceira.security.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,13 @@ import java.util.Set;
 public class CreateUserService {
     private final UserRepository userRepository;
     private final OfficeRepository officeRepository;
-    private final Argon2PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final ObjectMapper objectMapper;
 
     public UserDTO createUser(UserCreateDTO userCreateDTO) {
         UserEntity userEntity = objectMapper.convertValue(userCreateDTO, UserEntity.class);
-        userEntity.setOffices(Set.of(officeRepository.findById(OfficeEnum.USER.ordinal()).get()));
-        userEntity.setPassword(passwordEncoder.encode(userCreateDTO.getPassword()));
+        userEntity.setOffices(Set.of(officeRepository.findById(OfficeEnum.USER.getIdOffice()).get()));
+        userEntity.setPassword(passwordEncoder.encoder().encode(userCreateDTO.getPassword()));
          userEntity = userRepository.save(userEntity);
          return objectMapper.convertValue(userEntity, UserDTO.class);
     }
